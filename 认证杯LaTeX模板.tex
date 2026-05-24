@@ -1,0 +1,1431 @@
+\documentclass[a4paper]{article} %中文文档类
+\usepackage[UTF8]{ctex}  % Chinese
+\usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm,footskip=1cm]{geometry} % 页边距
+\usepackage{indentfirst} % 首行缩进
+\usepackage{fancyhdr,fancybox} % 设置页眉、页脚
+\usepackage{ctexcap} % 标题是中文的
+\usepackage{helvet} % 用来指定beamer使用的字体
+\usepackage{hyperref} % bookmarks 
+\usepackage{multicol} % 分栏
+\usepackage{cite} % 参考文献引用
+\usepackage{titlesec}% 设置一级标题
+\titleformat{\section}{\centering\zihao{4}\heiti}{\thesection}{1em}{}
+\usepackage[absolute]{textpos}
+\usepackage{framed}% 添加边框
+\usepackage{setspace}% 局部调整间距
+\usepackage{array}  
+\makeatletter
+\def\@cite#1#2{\textsuperscript{[{#1\if@tempswa , #2\fi}]}}
+\makeatother % 参考文献标号
+\usepackage{balance}
+\usepackage{threeparttable}
+\usepackage{graphicx} % 图片
+\usepackage[table]{xcolor} % 用于设置表格颜色
+\usepackage{subcaption}
+\usepackage{multirow} % 表格
+\usepackage{booktabs} % 三线表
+\usepackage{longtable} % 长表格
+\usepackage{diagbox}%表头斜线
+\usepackage{multirow}%表格合并
+\usepackage{makecell}%表格换行
+\usepackage{caption} % 标题
+\usepackage{enumerate} % 枚举环境
+\usepackage{amsmath, amsfonts, amssymb} % 数学公式、符号
+\usepackage[english]{babel} % 数学公式标准
+\usepackage{bm} % 加粗方程字体 
+\newtheorem{definition}{定义}
+\usepackage{listings}  % 加载 listings 宏包
+\usepackage{xcolor}    % 用于代码高亮的颜色
+\usepackage{listingsutf8} % 支持UTF-8代码高亮
+
+% 定义表格中使用的颜色
+\definecolor{lightblue}{RGB}{204, 229, 255}
+\definecolor{lightgreen}{RGB}{204, 255, 204}
+\definecolor{lightyellow}{RGB}{255, 255, 204}
+\definecolor{lightorange}{RGB}{255, 229, 204}
+\definecolor{lightpurple}{RGB}{230, 204, 255}
+
+% 配置 listings 的基本样式
+\lstset{
+    basicstyle=\small\ttfamily,  % 设置代码字体
+    numbers=left,               % 显示行号
+    numberstyle=\tiny\color{gray},  % 行号样式
+    keywordstyle=\color{blue},  % 关键字颜色
+    commentstyle=\color{green}, % 注释颜色
+    stringstyle=\color{red},    % 字符串颜色
+    showspaces=false,           % 不显示空格
+    showstringspaces=false,     % 不显示字符串中的空格
+    tabsize=4,                  % 设置 tab 宽度
+    breaklines=true,            % 自动换行
+    frame=single,               % 添加边框
+    escapeinside={(*@}{@*)},    % 允许在代码中使用 LaTeX 命令
+    inputencoding=utf8,         % 支持UTF-8编码
+}
+
+% 页眉页脚设置
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\lhead{} % 左侧页眉设置为空
+\chead{\textit{参赛队号 \# 无队号}} % 居中页眉设置
+\rhead{} % 右侧页眉设置为空
+\lfoot{}\cfoot{\thepage}\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{empty}{
+    %\renewcommand{\headrulewidth}{0.4pt} % 移除页眉下的横线
+    %\renewcommand{\lhead{\textit{题目：D题}}\chead{}\rhead{\textit{\# 1519}}} % 设置页眉内容
+    \renewcommand{\footrulewidth}{0pt} % 移除页脚上的横线
+    \renewcommand{\thepage}{} 
+}
+
+\title{\textbf{标题}}
+\date{}
+\author{}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black
+} % 使目录为黑色字
+
+{\songti \zihao{-4}
+\begin{document}  
+{\zihao{-4}\songti 
+
+    
+% Page3
+    \begin{center}
+    {\zihao{2}\songti \textbf{2025年第十八届“认证杯”数学中国}}
+\end{center}
+
+\begin{center}
+    {\zihao{2}\songti \textbf{数学建模网络挑战赛第一阶段论文}}
+\end{center}
+
+    {\zihao{4}\songti 题\quad\quad\,目}\qquad {\zihao{3} {\heiti\underline{无人机配送路径优化：模拟退火算法的应用研究 }}}
+
+    {\zihao{4}\songti 关 \,\,键\,\,\,词\qquad \underline{模拟退火算法、旅行商问题(TSP)、启发式算法}}
+
+    \begin{center}
+    {\zihao{2}\CJKfamily{li} 摘\qquad\qquad要：}
+\end{center}
+
+随着无人机技术的不断发展与成熟，无人机配送逐渐成为新热点。本文对无人机配送路径进行优化研究，探讨在存在禁飞区的情况下，如何实现多个无人机分区配送的路径优化。
+
+针对问题一，单个无人机需一次配送 35 个需求点。通过建立以\textbf{路径最小化}为目标函数的模型，并运用\textbf{模拟退火算法}求解最优路径。最终得出最短路径为 \textbf{[13，10，14，15，16，17，21，20，19，18，11，8，3，1，2，5，4，6，7，9，12，26，27，28，29，31，30，34，36，35，33，32，25，24，23，22，13]}，其最短路径长度为 \textbf{470} 个单位。
+
+针对问题二，属于多无人机配送问题。我们依据以出发点为圆心的扇形分区需求点密度分析，将城市划分为五个区域，其中稀疏区为 \textbf{2、4}，稠密区为 \textbf{1、3、5}。在每架无人机携带相同包裹的前提下，稀疏区安排\textbf{一架无人机}，稠密区安排\textbf{两架无人机}进行配送。
+
+针对问题三，对于问题一中的单无人机问题，我们定义一个燃料消耗函数，将该问题转化为\textbf{带载重变化的旅行商问题（TSP）}。这需要动态计算燃料消耗，可以采用\textbf{动态规划}或\textbf{启发式算法}，优先访问远距离、大载重的目的地。
+对于问题二中的多无人机问题，为每个区域建立目标函数，即总燃料消耗等于各无人机路径的燃料消耗之和，也等于各无人机的载重之和。我们仍然可以使用\textbf{模拟退火算法}进行求解，最终进行整合。
+
+针对问题四，在禁飞区的约束条件下，可沿禁飞区边缘将城市划分为上下半区。\textbf{在上半区，以 13 号点为起点，28 号点为终点；在下半区，以 28 号点为起点，沿边缘飞至 7 号点，最后从 12 号点返回 13 号点。} 该建模是基于无人机无法准确感知禁飞区边缘的假设。分别对上下半区运用\textbf{模拟退火算法}进行路径优化。
+
+综上所述，本文基于模拟退火算法，解决了无人机在不同约束条件下的配送路径优化问题。为单架和多架无人机的路径规划提供了有效的解决方案。
+
+    % 设定尺寸单位
+    \setlength{\TPHorizModule}{\textwidth}
+    \setlength{\TPVertModule}{\textwidth}
+
+    \begin{textblock}{1.0}(0.15,1.5)
+        \large
+        \textbf{参赛队号：}\underline{\# }
+        \\
+
+        \textbf{所选题目：}\underline{ D }题
+    \end{textblock}
+
+    \begin{textblock}{1.0}(0.5,1.5)
+        \large
+        \begin{center}
+            \begin{tabular}{|c|}
+                \hline
+                参赛密码\rule{3cm}{0.05em}\\
+                \textbf{（由组委会填写）}\\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{textblock}
+    \thispagestyle{empty}
+    \newpage
+% Page4
+    \begin{center}
+    {\zihao{3}\songti 英文摘要}
+\end{center}
+
+    With the continuous development and maturity of UAV technology, UAV distribution has gradually become a new hot spot. This paper carries out optimization research on drone distribution paths, and explores how to achieve path optimization of multiple drone partition distribution in the presence of no-fly zones.
+
+    For problem 1, a single UAV needs to deliver 35 demand points at a time. The optimal path is solved by building a model with\textbf{ path minimization} as the objective function and applying\textbf{ simulated annealing algorithm}. The final shortest path is \textbf{[13, 10, 14, 15, 16, 17, 21, 20, 19, 18, 11, 8, 3, 1, 2, 5, 4, 6, 7, 9, 12, 26, 27, 28, 29, 31, 30, 34, 36, 35, 33, 32, 25, 24, 23, 22, 13]}, and its shortest path length is \textbf{470} units.
+
+    For problem 2, it belongs to the problem of multi-drone distribution. We divide the city into five zones based on the density analysis of the demand points in the fan-shaped zoning with the departure point as the center of the circle, in which the sparse zones are \textbf{2 and 4}, and the dense zones are \textbf{1, 3, and 5}. Under the premise that each drone carries the same parcel,\textbf{ one drone} is arranged in the sparse zone, and \textbf{two drones} are arranged in the dense zone to carry out the delivery.
+
+    For Problem 3, for the single drone problem in Problem 1, we define a fuel consumption function.Thus the problem is transformed into a \textbf{Traveler's Problem with Load Variation (TSP)}. Fuel consumption needs to be computed dynamically, and \textbf{dynamic planning} or \textbf{heuristic algorithms} can be used to prioritize visits to long-distance destinations with large loads. For the multi-UAV problem in Problem 2, an objective function is established for each region, i.e., the total fuel consumption is equal to the sum of the fuel consumption of the paths of the UAVs, and also to the sum of the loads of the UAVs, which can still be solved by us using \textbf{simulated annealing algorithms} for the final integration.
+
+    For Problem 4, the city can be divided into upper and lower half zones along the edge of the no-fly zone, subject to the constraints of the no-fly zone. \textbf{In the upper half of the zone, point 13 is the starting point and point 28 is the end point; in the lower half of the zone, point 28 is the starting point, and the UAV flies along the edge to point 7, and finally returns to point 13 from point 12}. The modeling is based on the assumption that UAVs cannot accurately perceive the edge of the no-fly zone. A simulated annealing algorithm is applied to the upper and lower half of the zone for path optimization, respectively.
+    
+In summary, this paper solves the distribution path optimization problem for UAVs under different constraints based on simulated annealing algorithm. An effective solution is provided for path planning of single and multiple UAVs.
+
+\thispagestyle{empty}
+    \newpage
+% 正文
+    \clearpage
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    \section{问题重述}
+
+
+    \subsection{问题背景}
+    
+    随着物流行业的快速发展，无人机技术逐渐成为短途小件货物配送的新趋势。许多城市开始探索利用无人机进行快递和外卖配送，以提高配送效率、降低成本并减少交通拥堵。无人机能够快速穿梭于城市街区，实现点对点的直接配送，尤其适用于城市中心等交通繁忙区域。
+
+    
+    然而，无人机配送也面临着诸多挑战。一方面，城市环境复杂多变，可能存在禁飞区、高楼大厦、气象条件不稳定等因素，这些都会对无人机的飞行安全和配送效率产生影响。另一方面，无人机的载重能力有限，如何合理分配包裹、优化飞行路径以减少燃料消耗和时间成本，成为亟待解决的问题。
+
+    
+  \subsection{问题提出}
+根据题目要求，需建立数学模型，解决以下问题：
+
+对于问题一，忽略各种因素，同时忽略无人机的载重量对燃料消耗的影响，目标是使一架无人机完成所有配送任务并返回出发点的总飞行距离最短。
+
+对于问题二，有多架无人机可供使用考虑航程，以最小化总燃料消耗完成递送任务。该问题可以简化为最小化所有无人机的总飞行距离。
+
+对于问题三，基于问题一和问题二，重新建模，考虑无人机载重对燃料消耗的影响，优化无人机目的地列表和包裹分配，以减少总燃料消耗。
+
+对于问题四，城市中存在禁飞区，需为单架无人机安排目的地列表，使其在避开禁飞区的前提下，完成所有配送任务并返回出发点的总飞行距离最短。
+
+    \subsection{本文工作}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth, height=7.3cm]{30.png} % 设置高度为5cm
+    \renewcommand{\figurename}{图}
+    \caption{本文思维导图}
+    \label{fig:example}
+\end{figure}
+    \section{问题分析}
+    \subsection{问题一分析}
+这是一个典型的旅行商问题（TSP）变种。无人机需从仓库出发，访问所有分配的目的地后返回仓库，目标是寻找最短路径，即实现最少燃料消耗。将仓库和目的地视为图中的节点，节点间的距离采用欧几里得距离（或实际道路距离），目的是最小化总飞行距离，即路径长度。
+
+考虑到旅行商问题的求解算法可分为精确算法和启发式算法。精确算法如动态规划（Held-Karp 算法，仅适用于小规模问题）；启发式算法包括贪心算法（最近邻法）、模拟退火、遗传算法等（适用于大规模问题）。由于图中有 36 个节点，属于大规模问题，因此选用启发式算法中的模拟退火算法来寻找一个有序的目的地列表。
+
+    \subsection{问题二分析}
+    这是多旅行商问题（MTSP）或车辆路径问题（VRP）的简化版。在满足每架无人机装载量大致相等的条件下，目标是使所有无人机完成任务的总燃料消耗最小化。由于暂不考虑载重量对燃料消耗的影响，可以简化为最小化所有无人机的总飞行距离。
+
+    将仓库和目的地建模为图，目标是将目的地划分为若干子集，每个子集由一架无人机服务，各子集大小（负载）大致相等，同时使所有无人机路径长度之和最小。可以先运用聚类算法（如 K-means）将目的地按地理位置分组，每组对应一架无人机，然后对每组运用 TSP 算法中的启发式算法来规划路径。最终输出每架无人机的包裹分配列表以及每架无人机的飞行路径。
+
+    \subsection{问题三分析}
+    对于问题一中的单无人机问题，燃料消耗与载重和距离相关，假设燃料消耗率等于飞机的载重乘以飞行距离。因此，可以定义燃料消耗函数。当 F 值最小时，路径规划最为合理。由于每次卸货后载重减少，路径顺序对总燃料消耗有直接影响。该问题转化为带载重变化的 TSP，需要动态计算燃料消耗。可以采用动态规划或启发式算法，优先访问远距离、大载重的目的地。
+
+    对于问题二中的多无人机问题，在分配包裹时需同时考虑路径和载重。在问题二的基础上，为每个区域建立目标函数：总燃料消耗 = 各无人机路径的燃料消耗的总和= 各无人机的载重乘以飞行距离的总和，最后进行整合。
+
+    \subsection{问题四分析}
+    该问题是城市中存在障碍物约束的 TSP，路径需避开禁飞区。在满足禁飞区约束的条件下，目标是最小化无人机完成所有配送任务并返回出发点的总飞行距离。
+
+    在计算节点之间的距离时，不能简单地使用直线距离，而需要考虑禁飞区的存在。可以采用网格化方法，将城市地图划分为一个个小网格，将禁飞区内的网格标记为不可通过。然后运用路径搜索算法，从一个节点到另一个节点搜索最短路径，避开禁飞区。通过这种方式计算出所有节点之间的最短路径距离矩阵，再将其作为 TSP 问题的输入，运用问题一中提到的求解方法求解。
+
+    此外，对于禁飞区这种障碍物，还可以采用虚拟节点的方法。将禁飞区的边界视为障碍物，将无人机的飞行路径限制在障碍物的外侧。在路径规划时，将障碍物边界上的点作为虚拟节点，无人机只能通过这些虚拟节点绕过障碍物。
+
+    \section{模型假设}
+    为简化问题，作如下假设：
+
+    1、飞行速度假设：无人机的飞行速度在一般情况下保持恒定不变。
+
+    2、载重量与燃料假设：无人机的载重量对燃料消耗的影响呈线性关系，即载重量增加时，燃料消耗相应增加。
+
+    3、飞行路径假设：无人机的飞行路径为直线。
+
+    4、信息实时更新假设：无人机可以实时获取包裹的收货地址和状态信息，确保任务分配的准确性和及时性。
+
+    5、无人机航程充足假设：每架无人机的航程足够完成分配的任务列表，无需中途返回充电或更换电池。
+
+    6、飞行障碍假设：无人机在飞行过程中不受其他交通工具的影响。
+
+
+
+    \section{符号系统}
+   
+
+\begin{table}[htbp]
+    \zihao{-4}
+    \renewcommand{\thetable}{}
+    \renewcommand{\tablename}{表1} % 将 "Table" 替换为 "表"
+    \centering
+    \caption{无人机送货模型变量表} % 表格标题
+    \label{tab:tsp_variables}
+    \begin{threeparttable}
+        % 增加表格行间距
+        \renewcommand{\arraystretch}{1.5} % 原值为1，可根据需要调整
+         % 设置表格内容为小四号字体
+        \begin{tabular}{@{}cc@{}} % 修改此处为两个居中列
+            \toprule
+            \textbf{符号} & \textbf{说明}  \\ \hline
+            \( n \) & 节点数量（包裹数量） \\
+            \( D_{ij} \) & 节点 \( i \) 到节点 \( j \) 的距离 \\ 
+            \( i, j \) & 节点索引，取值范围为 1, 2, ..., \( n \) \\
+            \( C \) & 无人机最大飞行距离 \\ 
+            \( W \) & 无人机最大载重量 \\ 
+            \( T \) & 无人机最大飞行时间 \\ 
+            \( w_i \) & 节点 \( i \) 处包裹的重量 \\ 
+            \( t_i \) & 在节点 \( i \) 处的作业时间 \\ 
+            \( F \) & 燃料消耗总量 \\ 
+            \( k \) & 每个包裹的重量 \\
+            \bottomrule
+        \end{tabular}
+    \end{threeparttable}
+\end{table}
+注：未申明的变量以其在符号出现处的具体说明为准。
+    \section{模型建立}
+
+\subsection{问题一模型建立与求解}
+将题目中给出的图 1 放入 Auto CAD 中，以图片左下角为坐标原点建立直角坐标系，测得各点坐标，如图 2 所示。接着通过 R 语言绘制出空间分布图，如图 3 所示，其中红点 13 代表仓库，蓝点为各个目的地。
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.5\textwidth]{1.png}
+        \renewcommand{\figurename}{图}
+        \caption{各点坐标图}
+        \label{fig:example}
+    \end{figure}
+    \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth]{2.png}
+            \renewcommand{\figurename}{图}
+            \caption{仓库与目的地空间分布图I}
+            \label{fig:example}
+        \end{figure}
+
+        题目要求忽略无人机的载重量，因此可以建立一条由一架无人机将所有包裹送到目的地的最短路径，这属于旅行商问题，可运用模拟退火算法求解。借助 Python 软件编程，计算出一条最短路径，如图 4 和图 5 所示。  
+
+
+
+用于计算两个点之间的距离。对于两个点 \( (x_i, y_i) \) 和 \( (x_j, y_j) \)，它们之间的距离为：
+\begin{equation}
+D[i][j] = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2}
+\end{equation}
+
+
+用于计算整个路径的总距离。对于路径 \( \text{path} \)，总距离为：
+\begin{equation}
+\text{total\_distance} = \sum_{i=0}^{n-1} D[\text{path}[i]][\text{path}[(i+1) \% n]]
+\end{equation}
+其中，\( n \) 是路径中点的数量，由此可计算出路径的总距离，并在此基础上不断更新迭代找到最短路径。
+
+
+用于决定是否接受新的路径。接受概率 \( P \) 为：
+\begin{equation}
+P = 
+\begin{cases} 
+\exp\left(-\frac{\Delta}{T}\right) & \text{if } \Delta \geq 0 \\
+1 & \text{if } \Delta < 0 
+\end{cases}
+\end{equation}
+其中，\( \Delta \) 是新路径与当前路径的距离差，\( T \) 是当前温度。在模拟退火算法的迭代过程中，不断更新确定是否接受新路径，当新路径的距离差 \(\Delta = 10\)，温度 \(T = 100\) 时，计算得出接受概率 \(P = \exp(-10/100) \approx 0.9048\)。
+ \begin{equation}
+\sum_{i=1}^{n} t_i \cdot x_{ij} \leq T \quad \forall j \in \{1, 2, \ldots, n\}
+\end{equation}
+每个节点的作业时间 \( t_i = 5 \) 分钟，无人机的最大飞行时间 \( T = 300 \) 分钟，对于路径中的每个节点 \( j \)，计算得出总作业时间满足约束条件。
+
+      
+
+        最终测得最短路径为 [13，10，14，15，16，17，21，20，19，18，11，8，3，1，2，5，4，6，7，9，12，26，27，28，29，31，30，34，36，35，33，32，25，24，23，22，13]，即从 13 号点出发飞往 10 号点，依此类推，最后返回 13 号点，从而实现将所有包裹送达所有目的地。最短路径总路程为 470.64。
+         \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth, height=0.2\textheight, keepaspectratio]{3.png}
+    \renewcommand{\figurename}{图}
+    \caption{运行模拟退火算法图}
+    \label{fig:example1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth, height=0.2\textheight, keepaspectratio]{4.png}
+    \renewcommand{\figurename}{图}
+    \caption{最短路径图}
+    \label{fig:example2}
+\end{figure}
+
+
+
+    \subsection{问题二模型建立与求解}
+
+    使用多架无人机递送包裹，在确保每架无人机装载量大致相等的前提下，目标是最小化所有无人机完成任务的总燃料消耗。
+
+    依据聚类算法（如 K-means）将目的地按地理位置分组，分组情况如表 2 所示。由于题目要求每架无人机装载量大致相同，对于 1 区、3 区、5 区，分别派遣两架无人机，2 区和 4 区分别派遣一架无人机。
+
+    然后对每组运用 TSP 算法中的启发式算法来规划路径。最终输出每架无人机的包裹分配列表以及每架无人机的飞行路径，可以简化为最小化所有无人机的总飞行距离，进而实现最小化总燃料消耗。
+    最小化所有无人机的总飞行距离，以实现最小化总燃料消耗：
+\begin{equation}
+\min \sum_{i=1}^{m} \sum_{j=1}^{n_i} D[i][j]
+\end{equation}
+其中，\( m \) 是无人机的数量，\( n_i \) 是第 \( i \) 架无人机访问的节点数量，\( D[i][j] \) 是第 \( i \) 架无人机从节点 \( j \) 到下一个节点的距离。
+
+
+每架无人机的装载量大致相等：
+\begin{equation}
+\left| \frac{k_i}{F} - \frac{k_j}{F} \right| \leq \epsilon \quad \forall i, j
+\end{equation}
+其中，\( k_i \) 和 \( k_j \) 分别是第 \( i \) 和第 \( j \) 架无人机的装载量，\( F \) 是无人机的载重，\( \epsilon \) 是一个很小的正数，表示允许的装载量差异。假设每架无人机的最大载重量 \( F = 10 \) 千克，允许的差异 \( \epsilon = 0.1 \)，则每架无人机的装载量应在 \( 9 \) 千克到 \( 11 \) 千克之间。
+
+
+将目的地按地理位置分组，每个子集由一架无人机服务。对于每个目的地 \( x_i \)，计算其到各个聚类中心 \( c_j \) 的距离，并分配给最近的聚类中心：
+\begin{equation}
+x_i \in C_j \quad \text{if} \quad \arg\min_{j} \sqrt{(x_i - c_j)^2 + (y_i - c_j)^2}
+\end{equation}
+其中，\( C_j \) 是第 \( j \) 个聚类。假设目的地 \( x_i \) 的坐标为 (17, 30)，聚类中心 \( c_1 \) 的坐标为 (15, 15)，聚类中心 \( c_2 \) 的坐标为 (20, 20)，计算得出 \( x_i \) 到 \( c_1 \) 的距离为：
+\[
+\sqrt{(17-15)^2 + (30-15)^2} = \sqrt{4 + 225} = \sqrt{229} \approx 15.132 \text{ 千米}
+\]
+到 \( c_2 \) 的距离为：
+\[
+\sqrt{(17-20)^2 + (30-20)^2} = \sqrt{9 + 100} = \sqrt{109} \approx 10.440 \text{ 千米}
+\]
+因此，\( x_i \) 被分配到聚类 \( C_2 \)。
+
+对于每个聚类后的子集，求解TSP以规划无人机的路径。对于子集 \( S \) 中的节点，寻找最短路径：
+\begin{equation}
+\min \sum_{i=1}^{|S|} D[S[i]][S[i+1]]
+\end{equation}
+其中，\( S[i] \) 表示路径中的第 \( i \) 个节点，子集 \( S \) 包含节点 \( A(52,73) \)、\( B(25,34) \)、\( C(21,32) \)，计算得出路径 \( ABC \) 的总距离为 \(\sqrt{(25-52)^2 + (34-73)^2} + \sqrt{(21-25)^2 + (32-34)^2} = \sqrt{2250} + \sqrt{20} \approx 47.434\) 千米。
+
+通过上述模型和算法，可以有效地为每架无人机分配包裹并规划飞行路径，从而实现总燃料消耗的最小化。
+
+\begin{figure}[htbp]
+    \centering
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{表 2：分区情况表} % 将标题放在图片上方
+    \includegraphics[width=0.5\textwidth]{5.png}
+    \label{fig:example}
+\end{figure}
+\begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth]{6.png}
+            \captionsetup{labelformat=empty} % 禁用编号
+            \caption{图 6：仓库与目的地空间分布图II}
+            \label{fig:example}
+        \end{figure}
+
+        题目所给的无人机目的地共有 35 个，因此定义无人机的载货量为 4 到 6 个。通过“需求量 / 载货量”计算，大致需要 7 架无人机。以无人机出发点为中心，将图随机划分为 7 个扇形区域，每个扇形区域的角度约为 51°。
+
+        将无人机的每个目的地视为一个点，点密度 P = 单个扇形区域的点的数量（若点位于两个扇形区域的中间，则将点划分到相对较少的扇形区域）。当扇形区域的点的数量小于 7 并大于等于 4 时，将该区域定为疏区域；当扇形区域的点的数量大于 7 并小于等于 12 时，将该区域定为密区域。由于点的空间分布不均，可以将一些不符合定义的区域进行拆分，然后合并到其他区域。
+
+        根据图中点的密度分布，将图划分为 5 个扇形区域，如图 6 所示。这种划分方式旨在更好地反映不同区域的需求点分布特征，为后续的路径规划提供更合理的分区基础。接着，针对每个扇形区域，我们分别运行模拟退火算法。在算法执行过程中，初始路径是随机生成的，然后通过不断地在当前路径的邻域内随机生成新的候选路径来更新迭代。对于每个候选路径，计算其对应的目标函数值，即路径长度，并与当前路径的目标函数值进行比较。得出以下结论：
+
+        ⑴对于 1 区，由于目的地较多，属于密区域，因此派遣了两架无人机，路径分别为：
+
+        Path1 = {13（52，73），2（14，24），1（16，21），3（24，20），4（23，26），13（52，73）}；
+
+        Path2 = {13（52，73），7（25，34），6（21，32），5（17，30），12（36，63），13（52，73）}。
+
+        最终测得 1 区最短路径距离为 248.31。
+
+        ⑵对于 2 区，因为目的地较少，属于疏区域，可以视为旅行商问题（TSP），运用问题一的代码来获取最短路径，因此只需派遣一架无人机，路径如下：
+
+        Path = {13（52，73），10（50，55），9（39，47），8（40，27），11（76，24），13（52，73）}。
+
+        最终测得 2 区最短路径为 140.44。
+
+        ⑶对于 3 区，由于目的地较多，属于密区域，因此派遣了两架无人机，路径分别为：
+
+        Path1 = {13（52，73），17（80，70），16（77，66），15（70，67），14（63，70），13（52，73）}；
+
+        Path2 = {13（52，73），18（86，67），19（85，70），20（86，75），21（81，77），13（52，73）}。
+
+        最终测得 3 区最短路径为 136.70。
+
+        ⑷对于 4 区，因为目的地较少，属于疏区域，可以视为旅行商问题（TSP），运用问题一的代码来获取最短路径，因此只需派遣一架无人机，路径如下：
+
+        Path = {13（52，73），22（52，86），23（58，98），25（69，115），24（74，109），13（52，73）}。
+
+        最终测得 4 区最短路径距离为 96.67。
+
+        ⑸对于 5 区，由于目的地较多，属于密区域，因此派遣了两架无人机，路径分别为：
+
+        Path1 = {13（52，73），26（37，90），31（32，106），30（28，107），29（18，99），27（24，90），13（52，73）}；
+
+        Path2 = {13（52，73），28（10，84），36（13，117），35（15，119），34（18，116），33（26，120），32（36，114），13（52，73）}。
+
+        最终测得 5 区最短路径距离为 248.18。
+
+        最后结果如图 7 所示：
+       \begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{7.png}
+        \caption{1 区最短路径图}
+        \label{fig:case1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{8.png}
+        \caption{2 区最短路径图}
+        \label{fig:case2}
+    \end{subfigure}
+
+    \vspace{1em}
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{9.png}
+        \caption{3 区最短路径图}
+        \label{fig:case3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{10.png}
+        \caption{4 区最短路径图}
+        \label{fig:case4}
+    \end{subfigure}
+
+    \vspace{1em}
+
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{11.png}
+        \caption{5 区最短路径图}
+        \label{fig:case5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.12\textheight, keepaspectratio]{24.png}
+        \caption{总最短路径综合表}
+        \label{fig:case6}
+    \end{subfigure}
+    \captionsetup{labelformat=empty}
+    \caption{图 7：各区域最短路径图}
+    \label{fig:total}
+\end{figure}
+    \subsection{问题三模型建立与求解}
+
+    问题一 - 考虑单架无人机的载重量后对航程的规划
+
+    虽然需要考虑无人机的载重量对燃料消耗的影响，但本质上仍是一个旅行商问题。可采用动态规划或启发式算法，优先访问远距离、大载重的目的地。因此，建立数学模型如下：
+
+    无人机从起点出发时，所携带的包裹数量为 35，随后每经过一个目的地，所携带的包裹数量便会减少 1。当无人机经过最后一个目的地后，所携带的包裹数量变为 0。设无人机出发时所携带的包裹数量为 \( n \)，每个包裹的重量都为 \( k \)，无人机起点到第一个点的距离为 \( X_1 \)，从第一个点到第二个点的距离为 \( X_2 \)，以此类推，无人机经过的最后一个点到起点的距离为 \( X_{36} \)。将无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F = k \left[ n X_1 + (n-1) X_2 + (n-2) X_3 + \ldots + (n-34) X_{35} + (n-35) X_{36} + X_{36} \right]
+\end{equation}
+当 \( F \) 值最小时，路径规划才最为合理。
+
+引入新条件后，更新运用问题一所用的方法，如图 8 所示，即为最优路径。最优路径为：
+[13, 14, 15, 16, 17, 18, 19, 20, 21, 10, 8, 4, 3, 1, 2, 5, 6, 7, 9, 12, 22, 26, 30, 31, 23, 24, 25, 32, 33, 35, 36, 34, 29, 27, 28, 11, 13]，总距离为: 576.79，其中 F值为: 7631.65.
+
+\begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth]{13.png}
+            \captionsetup{labelformat=empty} % 禁用编号
+            \caption{图 8：1区最优路径图}
+            \label{fig:example}
+        \end{figure}
+问题二 - 考虑多架无人机的载重量后对航程的规划
+
+2 区和 4 区燃料消耗模型
+对于 2 区和 4 区，需要考虑无人机载重量对燃料消耗的影响。无人机从起点出发时，所携带的包裹数量为 4，随后每经过一个目的地，所携带的包裹数量便会减少 1。当无人机经过最后一个目的地后，所携带的包裹数量变为 0。设无人机每个包裹的重量都为 \( k \)，无人机起点到第一个点的距离为 \( X_1 \)，从第一个点到第二个点的距离为 \( X_2 \)，以此类推，无人机经过的最后一个点到起点的距离为 \( X_5 \)。将无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F = k \left[ 4 X_1 + 3 X_2 + 2 X_3 + 1 X_4 + X_5 \right]
+\end{equation}
+当 \( F \) 值最小时，路径规划才最为合理。
+
+通过 Python 软件编程，得到 2 区和 4 区的最优路径，如图 9 所示。
+2 区最优路径为：[13-10-9-8-11-13]，总距离为 142.42，其中 F 值为 243.98。
+4 区最优路径为：[13-22-23-25-24-13]，总距离为 96.67，其中 F 值为 182.75。
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,height=5cm]{14.png}
+        \caption{2区最优路径图}
+        \label{fig:cost}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth,height=5cm]{15.png}
+        \caption{4区最优路径图}
+        \label{fig:profit}
+    \end{subfigure}
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{图 9：2区和 4 区最优路径图}
+    \label{fig:cost_profit}
+\end{figure}
+
+
+对于 1 区和 3 区，需要考虑无人机载重量对燃料消耗的影响。两架无人机从起点出发时，每架无人机所携带的包裹数量为 4，随后每经过一个目的地，所携带的包裹数量便会减少 1。当无人机所携带的包裹数量为 0 时，无人机直线返回起点。设无人机每个包裹的重量都为 \( k \)，第一架无人机从起点到第一个点的距离为 \( X_1 \)，从第一个点到第二个点的距离为 \( X_2 \)，从第二个点到第三个点的距离为 \( X_3 \)，从第三个点到第四个点的距离为 \( X_4 \)，无人机经过的最后一个点到起点的距离为 \( X_5 \)；第二架无人机从起点到第一个点的距离为 \( X_6 \)，从第一个点到第二个点的距离为 \( X_7 \)，从第二个点到第三个点的距离为 \( X_8 \)，从第三个点到第四个点的距离为 \( X_9 \)，无人机经过的最后一个点到起点的距离为 \( X_{10} \)。
+
+将第一架无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F_1 = k \left[ 4 X_1 + 3 X_2 + 2 X_3 + 1 X_4 + X_5 \right]
+\end{equation}
+
+将第二架无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F_2 = k \left[ 4 X_6 + 3 X_7 + 2 X_8 + 1 X_9 + X_{10} \right]
+\end{equation}
+
+当 \( F_1 + F_2 \) 值最小时，路径规划才最为合理。
+通过 Python 软件编程，得到 1 区和 3 区的最优路径，如图 10 所示。
+\begin{table}[htbp]
+     \renewcommand{\thetable}{}
+    \renewcommand{\tablename}{表3}
+    \centering
+    \caption{1区的两条路径}
+    \label{tab:optimal_paths}
+    \begin{tabular}{@{}cccccc@{}}
+        \toprule
+        路线 & 最优路径 & 距离 & F值 & 总距离 & 总F值 \\
+        \midrule
+        1 & 13-6-5-2-1-13 & 129.43 & 299.29 & \multirow{2}{*}{253.58} & \multirow{2}{*}{550.33} \\
+        \cmidrule(lr){1-4}
+        2 & 13-12-7-4-3-13 & 124.15 & 251.04 & & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{table}[htbp]
+     \renewcommand{\thetable}{}
+    \renewcommand{\tablename}{表4}
+    \centering
+    \caption{3区的两条路径}
+    \label{tab:paths_zone3}
+    \begin{tabular}{@{}cccccc@{}}
+        \toprule
+        路线 & 最优路径 & 距离 & F值 & 总距离 & 总F值 \\
+        \midrule
+        1 & 13-14-15-16-17-13 & 59.25 & 115.76 & \multirow{2}{*}{136.70} & \multirow{2}{*}{296.90} \\
+        \cmidrule(lr){1-4}
+        2 & 13-21-20-19-18-13 & 77.45 & 181.14 & & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.9cm]{16.png} % 调整高度为5cm
+        \caption{1区最优路径图}
+        \label{fig:cost}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=4.9cm]{17.png} % 调整高度为5cm
+        \caption{3区最优路径图}
+        \label{fig:profit}
+    \end{subfigure}
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{图 10：1区和 3 区最优路径图}
+    \label{fig:cost_profit}
+\end{figure}
+
+对于 5 区，需要考虑无人机载重量对燃料消耗的影响。两架无人机从起点出发，第一架无人机所携带的包裹数为 5，第二架无人机所携带的包裹数为 6，随后每架无人机每经过一个目的地，所携带的包裹数量便会减少 1。当无人机所携带的包裹数量为 0 时，无人机直线返回起点。设无人机每个包裹的重量都为 \( k \)，第一架无人机从起点到第一个点的距离为 \( X_1 \)，从第一个点到第二个点的距离为 \( X_2 \)，从第二个点到第三个点的距离为 \( X_3 \)，从第三个点到第四个点的距离为 \( X_4 \)，从第四个点到第五个点的距离为 \( X_5 \)，无人机经过的最后一个点到起点的距离为 \( X_6 \)；第二架无人机从起点到第一个点的距离为 \( X_7 \)，从第一个点到第二个点的距离为 \( X_8 \)，从第二个点到第三个点的距离为 \( X_9 \)，从第三个点到第四个点的距离为 \( X_{10} \)，从第四个点到第五个点的距离为 \( X_{11} \)，从第五个点到第六个点的距离为 \( X_{12} \)，无人机经过的最后一个点到起点的距离为 \( X_{13} \)。
+
+根据动态规划的最优性原理，建立递推方程：
+
+\begin{equation}
+V_{k}(s_{k}) = \min_{u_{k}} \left[ F_{k}(s_{k}, u_{k}) + V_{k+1}(s_{k+1}) \right]
+\end{equation}
+
+其中：
+\begin{itemize}
+    \item \( V_{k}(s_{k}) \)：从阶段 \( k \) 状态 \( s_{k} \) 到最终阶段的最小燃料消耗。
+    \item \( V_{k+1}(s_{k+1}) \)：从阶段 \( k+1 \) 状态 \( s_{k+1} \) 到最终阶段的最小燃料消耗。
+\end{itemize}
+
+当所有包裹都投递完毕时，无人机需要返回起点。边界条件为：
+
+\begin{equation}
+V_{N+1}(s_{N+1}) = k \times 0 \times X_{\text{pos}_{N+1}, \text{起点}}
+\end{equation}
+
+
+将第一架无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F_1 = k \left[ 5 X_1 + 4 X_2 + 3 X_3 + 2 X_4 + 1 X_5 + X_6 \right]
+\end{equation}
+
+将第二架无人机燃料的消耗关于载重定义为：
+\begin{equation}
+F_2 = k \left[ 6 X_7 + 5 X_8 + 4 X_9 + 3 X_{10} + 2 X_{11} + 1 X_{12} + X_{13} \right]
+\end{equation}
+
+当 \( F_1 + F_2 \) 值最小时，路径规划才最为合理。通过 Python 软件编程，得到 5 区的最优路径，如图 11 所示。
+\begin{table}[htbp]
+     \renewcommand{\thetable}{}
+    \renewcommand{\tablename}{表5}
+    \centering
+    \caption{5区的两条路径}
+    \label{tab:paths_zone5}
+    \begin{tabular}{@{}cccccc@{}}
+        \toprule
+        路线 & 最优路径 & 距离 & F值 & 总距离 & 总F值 \\
+        \midrule
+        1 & 13-26-27-29-33-32-13 & 124.63 & 298.43 & \multirow{2}{*}{264.42} & \multirow{2}{*}{699.33} \\
+        \cmidrule(lr){1-4}
+        2 & 13-31-30-34-35-36-28-13 & 139.79 & 400.90 & & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth]{18.png}
+            \captionsetup{labelformat=empty} % 禁用编号
+            \caption{图 11：5区最优路径图}
+            \label{fig:example}
+        \end{figure}
+
+       \noindent 最终，对所有区域的路线进行汇总，如表 6 ，得出最终距离为893.79，总F值为1973.29.
+        \begin{figure}[htbp]
+    \centering
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{表 6：总路线表} % 将标题放在图片上方
+    \includegraphics[width=0.6\textwidth]{25.png}
+    \label{fig:example}
+\end{figure}
+
+
+\subsection{问题四模型建立与求解}
+
+城市中存在障碍物约束的 TSP，路径需避开禁飞区。在考虑城市中存在禁飞区的情况下，重新对问题 1 进行建模，即安排单架无人机的目的地列表，使得无人机在避开禁飞区的前提下，完成所有配送任务并返回出发点的总飞行距离最短。
+
+\textbf{障碍物成本函数} \\
+定义障碍物成本函数 \( C_{\text{obstacle}}(\text{pos}) \)，表示无人机在位置 \(\text{pos}\) 时接近障碍物（禁飞区）的成本。可以用距离的倒数或二进制指示函数表示：
+
+距离倒数形式：
+\begin{equation}
+C_{\text{obstacle}}(\text{pos}) = \frac{1}{d(\text{pos}, \text{obstacle})}
+\end{equation}
+
+二进制指示形式：
+\begin{equation}
+C_{\text{obstacle}}(\text{pos}) = 
+\begin{cases} 
+1 & \text{若 } \text{pos} \in \text{obstacle} \\
+0 & \text{否则}
+\end{cases}
+\end{equation}
+
+ \textbf{阶段燃料消耗} \\
+考虑障碍物影响后，阶段 \( k \) 的燃料消耗公式为：
+\begin{equation}
+F_{k}(s_{k}, u_{k}) = k \times (n_{k}) \times X_{\text{pos}_{k}, \text{pos}_{k+1}} + \lambda \times C_{\text{obstacle}}(\text{pos}_{k+1})
+\end{equation}
+其中：
+\begin{itemize}
+    \item \( \lambda \)：障碍物成本权重，用于平衡燃料消耗与避开障碍物的优先级。
+    \item \( X_{\text{pos}_{k}, \text{pos}_{k+1}} \)：从位置 \(\text{pos}_{k}\) 到位置 \(\text{pos}_{k+1}\) 的距离。
+\end{itemize}
+
+\textbf{启发式函数}：估计从当前节点到终点的最小距离（如欧几里得距离或曼哈顿距离）。
+\begin{equation}
+h(n) = \text{distance}(n, \text{终点})
+\end{equation}
+在A*算法中，我们使用启发式函数 h(n) 来估计从当前节点 n 到终点的最小距离，这可以帮助算法更高效地找到最优路径。具体来说，我们可以选择欧几里得距离（直线距离）或曼哈顿距离（网格距离）作为启发式函数。
+
+\textbf{路径成本函数}：计算从起点到当前节点的实际成本。
+\begin{equation}
+g(n) = \sum_{i=1}^{k} \text{distance}(n_{i-1}, n_i)
+\end{equation}
+路径成本函数 g(n) 则计算从起点到当前节点 n 的实际飞行距离，它通过累加路径上每一段的距离来得到总成本。
+
+\textbf{总评估函数}：综合实际成本和启发式估计，指导搜索方向。
+\begin{equation}
+f(n) = g(n) + h(n)
+\end{equation}
+总评估函数 f(n) 是启发式函数和路径成本函数的综合，用于指导搜索的方向，使得算法在探索过程中既能考虑实际成本，又能利用启发式信息快速逼近终点。
+
+\textbf{禁飞区约束}：在搜索过程中，为了确保无人机避开禁飞区，我们在搜索过程中忽略所有位于禁飞区内的节点，这样生成的路径就不会穿过这些区域。
+
+根据题目中给出的图 2 放入 Auto CAD 中，以图片左下角为坐标原点建立直角坐标系，测得两个四边形禁区顶点的坐标，然后使用 R 语言画出，如图 12 所示。
+\begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth,height=5cm]{19.png}
+            \captionsetup{labelformat=empty} % 禁用编号
+            \caption{图 12：带有禁飞区的空间分布图}
+            \label{fig:example}
+        \end{figure}
+
+方法一：由于禁飞区的阻挡，将无人机的目的地用一条直线分为上半部分和下半部分这两部分，如图 13 所示。
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{26.png}
+        \caption{分区情况I图}
+        \label{fig:cost}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{20.png}
+        \caption{分区情况II图}
+        \label{fig:profit}
+    \end{subfigure}
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{图 13：上下两部分分区图}
+    \label{fig:cost_profit}
+\end{figure}
+
+上半部分：求出无人机从仓库对应的点 13 出发，依次经过点 14，15，16，17，18，19，20，21，22，23，24，25，26，27，29，30，31，32，33，34，35，36，最后到达终点 28 且不经过禁飞区的最短路径。这实际上是 TSP 问题的一个变种，通过 Python 软件编程，运用模拟退火算法（SA）计算出如图 14 所示的最短路径。
+
+测得的最短路径为：13-14-15-16-17-18-19-20-21-22-23-24-25-32-33-35-36-34-30-31-26-27-29-28，测定最短路径的距离为 261.26。
+
+下半部分：求从点 28 出发，到达点 7 后，依次经过点 6，5，2，1，3，4，8，11，然后经过点 9，再经过点 10，12，最终到达点 13 且不经过禁飞区的最短路径。这也是 TSP 问题的一个变种，通过 Python 软件编程，运用模拟退火算法（SA）计算出如图 14 所示的最短路径。
+
+测得的最短路径为：28-7-6-5-2-1-3-4-8-11-9-10-12-13，测定最短路径的距离为 230.92。
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{21.png}
+        \caption{上半部分最短路径图}
+        \label{fig:cost}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{22.png}
+        \caption{下半部分最短路径图}
+        \label{fig:profit}
+    \end{subfigure}
+    \captionsetup{labelformat=empty} % 禁用编号
+    \caption{图 14：上下两部分最短路径图}
+    \label{fig:cost_profit}
+\end{figure}
+
+两部分加起来的最短路径为：
+
+13-14-15-16-17-18-19-20-21-22-23-24-25-32-33-35-36-34-30-31-26-27-29-28-7-6-5-2-1-3-4-8-11-9-10-12-13
+
+最短总距离为：492.18
+
+方法二：由于禁飞区的阻挡，无人机需要对禁飞区进行绕行，因此对第一题图 5 所示的最短路径图进行修改，如图 15 所示。
+\begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.5\textwidth]{23.png}
+            \captionsetup{labelformat=empty} % 禁用编号
+            \caption{图 15：方法二最短路径图}
+            \label{fig:example}
+        \end{figure}
+
+
+方法二优化后的最短路径为 [13，10，14，15，16，17，21，20，19，18，禁飞区 2 顶点 2，11，8，3，1，2，5，4，6，7，9，12，禁飞区 1 顶点 2，禁飞区 1 顶点 3，26，27，28，29，31，30，34，36，35，33，32，25，24，23，22，13]，测定最短路径的距离为 478.61。
+
+\begin{table}[htbp]
+    \zihao{-4}
+    \renewcommand{\arraystretch}{1.5} 
+     \renewcommand{\thetable}{}
+    \renewcommand{\tablename}{表7}
+    \centering
+    \caption{四边形禁飞区顶点坐标}
+    \label{tab:forbidden_zones}
+    \begin{tabular}{@{}ccc@{}}
+        \toprule
+         & 禁飞区1 & 禁飞区2 \\
+        \midrule
+        顶点1 & (18, 63) & (59, 39) \\
+        顶点2 & (44, 69) & (81, 36) \\
+        顶点3 & (43, 87) & (70, 60) \\
+        顶点4 & (22, 81) & (59, 57) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{模型的评价}
+    \subsection{模型的优势}
+    本研究的模型涵盖了从单架无人机到多架无人机的多种场景，并考虑了载重量对燃料消耗的影响以及禁飞区的限制。这些模型能够适应不同的实际需求，为无人机送货规划提供了较为全面的解决方案。
+
+    通过引入模拟退火算法等路径搜索方法，模型能够在复杂的城市环境中为无人机规划出避开禁飞区的最优路径。同时，模型还考虑了无人机的载重量对燃料消耗的影响，使得规划结果更加贴近实际应用。
+
+    
+    \subsection{模型的局限性}
+
+    在多架无人机的场景下，模型的求解复杂度较高，尤其是在考虑载重量对燃料消耗的影响时。这可能导致在大规模问题中求解时间较长，影响实际应用的效率。
+
+    假设条件：为了简化问题，模型中做出了一些假设，如无人机的飞行速度恒定、包裹的大小和重量差异忽略不计等。这些假设在一定程度上偏离了实际情况，可能会影响模型的准确性和适用性。
+
+    动态调整能力：模型主要针对静态的规划问题，对于动态变化的环境（如实时的气象条件变化、临时的禁飞区调整等）的适应能力较弱。在实际应用中，需要进一步增强模型的动态调整能力，以应对复杂多变的实际情况。
+
+
+    \section{模型推广}
+    
+    在城市物流配送方面，本模型可以直接应用于城市快递和外卖配送场景，通过合理规划无人机的航线和任务分配，提高配送效率，降低运营成本。
+
+    在应急救援方面，在自然灾害或紧急情况下，无人机可以快速将救援物资送达指定地点。本模型可以为无人机的路径规划和任务分配提供科学依据，提高应急救援的效率。
+
+    在农村和偏远地区物流方面，对于农村和偏远地区，道路条件较差，无人机送货可以作为一种有效的补充手段。本模型可以帮助规划最优的送货路径，确保物资能够及时送达。
+
+
+    \section{参考文献与引用}
+    \bibliographystyle{plain} % 使用 plain 格式
+\renewcommand{\refname}{参考文献} % 删除 "References" 标题
+    \begin{thebibliography}{99}  
+\bibitem{ref1}吕伟,吴嗣贤,吴子涵,等.基于时间窗的无人机配送应急物资路径规划研究[J].中国安全生产科学技术,2025,21(03):170-176. 
+\bibitem{ref2}张慧敏,王葆宗,陆东生,等.邮政物流中无人机路径规划优化研究[J].邮政研究,2025,41(02):3-9.DOI:10.13955/j.yzyj.2025.02.01.07.
+\bibitem{ref3}李从庆.基于模拟退火算法的车辆取送货运输路径研究[J].郑州铁路职业技术学院学报,2025,37(01):49-53.DOI:10.13920/j.cnki.zztlzyjsxyxb.2025.01.027.
+\bibitem{ref4}胡悦,孙智达,黄惠.面向无人机路径规划的可视分析系统[J/OL].图学学报,1-12[2025-04-13].http://kns.cnki.net/kcms/detail/10.1034.T.20250224.1028.002.html. 
+\end{thebibliography}
+    \newpage
+
+    \appendix
+\addcontentsline{toc}{section}{附录}  % 将附录添加到目录中
+\section*{附录}
+问题一原始运行代码
+\begin{lstlisting}[language=Python, texcl=true]
+    import numpy as np
+import matplotlib.pyplot as plt
+import random
+import math
+
+# 定义城市坐标
+cities = np.array([
+    [16, 21],   # City 1
+    [14, 24],   # City 2
+    [24, 20],   # City 3
+    [23, 26],   # City 4
+    [17, 30],   # City 5
+    [21, 32],   # City 6
+    [25, 34],   # City 7
+    [40, 27],   # City 8
+    [39, 47],   # City 9
+    [50, 55],   # City 10
+    [76, 24],   # City 11
+    [36, 63],   # City 12
+    [52, 73],   # City 13
+    [63, 70],   # City 14
+    [70, 67],   # City 15
+    [77, 66],   # City 16
+    [80, 70],   # City 17
+    [86, 67],   # City 18
+    [85, 70],   # City 19
+    [86, 75],   # City 20
+    [81, 77],   # City 21
+    [52, 86],   # City 22
+    [58, 98],   # City 23
+    [74, 109],  # City 24
+    [69, 115],  # City 25
+    [37, 90],   # City 26
+    [24, 90],   # City 27
+    [10, 84],   # City 28
+    [18, 99],   # City 29
+    [28, 107],  # City 30
+    [32, 106],  # City 31
+    [36, 114],  # City 32
+    [26, 120],  # City 33
+    [18, 116],  # City 34
+    [15, 119],  # City 35
+    [13, 117],  # City 36
+])
+
+# Check the number of coordinates
+if len(cities) != 36:
+    raise ValueError("The number of cities must be 36")
+
+# Display city coordinates
+print("City coordinates:")
+for i, (x, y) in enumerate(cities):
+    print(f"City {i+1}: ({x:.2f}, {y:.2f})")
+
+# Calculate the distance between two cities
+def distance(city1, city2):
+    return np.sqrt((city1[0] - city2[0])**2 + (city1[1] - city2[1])**2)
+
+# Calculate the total distance of a path
+def total_distance(path):
+    total = 0.0
+    for i in range(len(path)):
+        total += distance(cities[path[i]], cities[path[(i+1)%len(path)]])
+    return total
+
+# Simulated Annealing Algorithm
+def simulated_annealing(cities, initial_temp, cooling_rate, num_iterations):
+    num_cities = len(cities)
+    
+    # Initial path: random permutation
+    current_path = list(range(num_cities))
+    random.shuffle(current_path)
+    
+    current_distance = total_distance(current_path)
+    best_path = current_path.copy()
+    best_distance = current_distance
+    
+    temp = initial_temp
+    
+    for i in range(num_iterations):
+        # Generate a new path: randomly swap two cities
+        new_path = current_path.copy()
+        a, b = random.sample(range(num_cities), 2)
+        new_path[a], new_path[b] = new_path[b], new_path[a]
+        
+        new_distance = total_distance(new_path)
+        
+        # Calculate the energy difference
+        delta = new_distance - current_distance
+        
+        # Decide whether to accept the new path
+        if delta < 0 or random.random() < math.exp(-delta / temp):
+            current_path = new_path
+            current_distance = new_distance
+            
+            # Update the best path
+            if current_distance < best_distance:
+                best_path = current_path.copy()
+                best_distance = current_distance
+        
+        # Lower the temperature
+        temp *= cooling_rate
+        
+        # Print progress
+        if i % 10000 == 0:
+            print(f"Iteration {i}: Current Distance = {current_distance:.2f}, Best Distance = {best_distance:.2f}, Temperature = {temp:.2f}")
+    
+    return best_path, best_distance
+
+# Run the Simulated Annealing Algorithm
+initial_temp = 10000
+cooling_rate = 0.9995
+num_iterations = 100000
+
+print("\nStarting Simulated Annealing Algorithm...")
+best_path, best_distance = simulated_annealing(cities, initial_temp, cooling_rate, num_iterations)
+
+print("\nOptimal Path Order (City Indices):", best_path)
+print("Optimal Path Length:", best_distance)
+
+# Visualize the results
+def plot_path(cities, path, title):
+    plt.figure(figsize=(12, 8))
+    
+    # Plot cities
+    plt.scatter(cities[:, 0], cities[:, 1], c='red', s=100)
+    for i, (x, y) in enumerate(cities):
+        plt.text(x, y, str(i+1), color='black', ha='center', va='center', fontsize=8)
+    
+    # Plot the path
+    for i in range(len(path)):
+        start = cities[path[i]]
+        end = cities[path[(i+1)%len(path)]]
+        plt.plot([start[0], end[0]], [start[1], end[1]], 'b-', linewidth=1)
+    
+    plt.title(title, fontsize=14)
+    plt.xlabel('X Coordinate', fontsize=12)
+    plt.ylabel('Y Coordinate', fontsize=12)
+    plt.grid(True)
+    plt.show()
+
+# Plot the optimal path
+plot_path(cities, best_path, f"Optimized Path using Simulated Annealing Algorithm (Distance: {best_distance:.2f})")
+
+# Print the city visiting order
+print("\nCity Visiting Order (Starting from City 13):")
+for i, city_idx in enumerate(best_path):
+    print(f"Step {i+1}: Visit City {city_idx+1} (Coordinates: {cities[city_idx][0]:.2f}, {cities[city_idx][1]:.2f})")
+\end{lstlisting}
+问题二原始运行代码
+\begin{lstlisting}[language=Python, texcl=true]
+import itertools
+import math
+import matplotlib.pyplot as plt
+
+def calculate_distance(p1, p2):
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+
+def solve_tsp(points):
+    n = len(points)
+    if n == 0:
+        return [], 0
+    # Generate all possible paths and compute the shortest
+    shortest_path = None
+    min_distance = float('inf')
+    for perm in itertools.permutations(points):
+        current_distance = 0
+        # From start to first point
+        current_distance += calculate_distance([52, 73], perm[0])
+        # Between points in the permutation
+        for i in range(n - 1):
+            current_distance += calculate_distance(perm[i], perm[i+1])
+        # Back to start
+        current_distance += calculate_distance(perm[-1], [52, 73])
+        if current_distance < min_distance:
+            min_distance = current_distance
+            shortest_path = list(perm)
+    return shortest_path, min_distance
+
+def find_optimal_paths(points):
+    n = len(points)
+    # Generate all possible combinations of 5 points for the first person
+    best_total_distance = float('inf')
+    best_path1 = []
+    best_path2 = []
+    for combo in itertools.combinations(points, 5):
+        set1 = list(combo)
+        set2 = [p for p in points if p not in set1]
+        path1, dist1 = solve_tsp(set1)
+        path2, dist2 = solve_tsp(set2)
+        total_distance = dist1 + dist2
+        if total_distance < best_total_distance:
+            best_total_distance = total_distance
+            best_path1 = path1
+            best_path2 = path2
+    return best_path1, best_path2, best_total_distance
+
+def plot_paths(path1, path2):
+    plt.figure(figsize=(10, 8))
+    # Plot all points
+    points = [  ]  # Enter coordinates here
+    for point in points:
+        plt.plot(point[0], point[1], 'bo')
+        plt.text(point[0], point[1], f'({point[0]},{point[1]})')
+    # Start and end point
+    start = [52, 73]
+    plt.plot(start[0], start[1], 'ro')
+    plt.text(start[0], start[1], 'Start/End (52,73)')
+    # Plot path1
+    if path1:
+        path1_x = [start[0]] + [p[0] for p in path1] + [start[0]]
+        path1_y = [start[1]] + [p[1] for p in path1] + [start[1]]
+        plt.plot(path1_x, path1_y, 'r-', label='Person 1 Path')
+    # Plot path2
+    if path2:
+        path2_x = [start[0]] + [p[0] for p in path2] + [start[0]]
+        path2_y = [start[1]] + [p[1] for p in path2] + [start[1]]
+        plt.plot(path2_x, path2_y, 'g-', label='Person 2 Path')
+    plt.xlabel('X Coordinate')
+    plt.ylabel('Y Coordinate')
+    plt.title('Optimal Paths for Two Persons')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+def main():
+    points = [  ]  # Enter coordinates here
+    path1, path2, total_distance = find_optimal_paths(points)
+    print("Optimal Path for Person 1 (4 points):", path1)
+    print("Optimal Path for Person 2 (5 points):", path2)
+    print("Total shortest distance:", total_distance)
+    plot_paths(path1, path2)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+问题三中对问题一的原始运行代码
+\begin{lstlisting}[language=Python, texcl=true]
+    import numpy as np
+import matplotlib.pyplot as plt
+from math import sqrt
+import random
+
+# Define the start point and the list of points to visit
+start = [52, 73]
+points = [
+    [16, 21], [14, 24], [24, 20], [23, 26],
+    [17, 30], [21, 32], [25, 34], [36, 63]
+]
+
+# Function to compute the Euclidean distance between two points
+def distance(p1, p2):
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+
+# Function to compute the objective function F for a given route
+def calculate_F(permutation):
+    X = []
+    # From start to the first point
+    X.append(distance(start, permutation[0]))
+    # Between intermediate points
+    for i in range(len(permutation) - 1):
+        X.append(distance(permutation[i], permutation[i+1]))
+    # From last point back to start
+    X.append(distance(permutation[-1], start))
+    # Calculate F value
+    F = 4 * X[0] + 3 * X[1] + 2 * X[2] + X[3] + X[4]
+    total_distance = sum(X)
+    return F, total_distance, X
+
+# Initialization of variables to store the optimal solution
+min_total_F = float('inf')
+best_route1 = None
+best_route2 = None
+best_F1 = 0
+best_F2 = 0
+best_distance1 = 0
+best_distance2 = 0
+best_X1 = []
+best_X2 = []
+
+# Iterate over all combinations of 4 points for the first plane
+for combo in itertools.combinations(points, 4):
+    remaining = [p for p in points if p not in combo]
+    # Iterate over all permutations of the selected 4 points for the first plane
+    for perm1 in itertools.permutations(combo):
+        F1, distance1, X1 = calculate_F(perm1)
+        # Iterate over all permutations of the remaining 4 points for the second plane
+        for perm2 in itertools.permutations(remaining):
+            F2, distance2, X2 = calculate_F(perm2)
+            total_F = F1 + F2
+            if total_F < min_total_F:
+                min_total_F = total_F
+                best_route1 = perm1
+                best_route2 = perm2
+                best_F1 = F1
+                best_F2 = F2
+                best_distance1 = distance1
+                best_distance2 = distance2
+                best_X1 = X1
+                best_X2 = X2
+
+# Output the results
+print("Optimal Routes:")
+print("Plane 1 Route: Start ->", " -> ".join([str(p) for p in best_route1]), "-> Start")
+print("Plane 2 Route: Start ->", " -> ".join([str(p) for p in best_route2]), "-> Start")
+print("Plane 1 Flight Distance:", best_distance1)
+print("Plane 2 Flight Distance:", best_distance2)
+print("Plane 1 F Value:", best_F1)
+print("Plane 2 F Value:", best_F2)
+print("Total F (F1 + F2):", min_total_F)
+print("Plane 1 Segment Distances:", best_X1)
+print("Plane 2 Segment Distances:", best_X2)
+
+# Plotting the optimal routes
+plt.figure(figsize=(10, 8))
+
+# Plot the start point
+plt.scatter(start[0], start[1], color='red', label='Start', s=100)
+plt.text(start[0], start[1], 'Start', fontsize=12, ha='right')
+
+# Plot the intermediate points
+for point in points:
+    plt.scatter(point[0], point[1], color='blue')
+    plt.text(point[0], point[1], str(point), fontsize=10, ha='right')
+
+# Plot Plane 1's route
+route1 = [start] + list(best_route1) + [start]
+x1 = [p[0] for p in route1]
+y1 = [p[1] for p in route1]
+plt.plot(x1, y1, color='green', label='Plane 1', marker='o')
+
+# Plot Plane 2's route
+route2 = [start] + list(best_route2) + [start]
+x2 = [p[0] for p in route2]
+y2 = [p[1] for p in route2]
+plt.plot(x2, y2, color='purple', label='Plane 2', marker='o')
+
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Optimal Flight Paths')
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
+问题三中对问题二(5区)的原始运行代码
+\begin{lstlisting}[language=Python, texcl=true]
+    import itertools
+import math
+import matplotlib.pyplot as plt
+import random
+
+# Define points
+start = [52, 73]
+points = [
+    [37, 90], [24, 90], [10, 84], [18, 99], [28, 107],
+    [32, 106], [36, 114], [26, 120], [18, 116], [15, 119], [13, 117]
+]
+
+# Calculate distance between two points
+def distance(a, b):
+    return math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
+
+# Calculate F1 and D1
+def calculate_F1_D1(path):
+    X = []
+    X.append(distance(start, path[0]))
+    for i in range(len(path)-1):
+        X.append(distance(path[i], path[i+1]))
+    X.append(distance(path[-1], start))
+    weights = [5, 4, 3, 2, 1, 1]
+    F1 = sum(w * x for w, x in zip(weights, X))
+    D1 = sum(X)
+    return F1, D1, X
+
+# Calculate F2 and D2
+def calculate_F2_D2(path):
+    X = []
+    X.append(distance(start, path[0]))
+    for i in range(len(path)-1):
+        X.append(distance(path[i], path[i+1]))
+    X.append(distance(path[-1], start))
+    weights = [6, 5, 4, 3, 2, 1, 1]
+    F2 = sum(w * x for w, x in zip(weights, X))
+    D2 = sum(X)
+    return F2, D2, X
+
+# Greedy algorithm to generate path order (to reduce number of permutations)
+def greedy_path(start, points, is_plane1=True):
+    unvisited = points.copy()
+    path = []
+    current = start
+    while unvisited:
+        # Sort by distance
+        unvisited.sort(key=lambda p: distance(current, p))
+        # Select next point based on weights in objective function
+        next_p = unvisited[0]
+        path.append(next_p)
+        current = next_p
+        unvisited.remove(next_p)
+    return path
+
+# Generate all possible allocations
+min_total = float('inf')
+best_F1 = None
+best_D1 = None
+best_F2 = None
+best_D2 = None
+best_path1 = None
+best_path2 = None
+
+# Iterate through all C(11,5) combinations
+for selected_indices in itertools.combinations(range(len(points)), 5):
+    # Points for the first plane
+    path1_points = [points[i] for i in selected_indices]
+    # Points for the second plane
+    path2_points = [points[i] for i in range(len(points)) if i not in selected_indices]
+    
+    # Try all permutations for path1 (since 5! = 120 is manageable)
+    for perm1 in itertools.permutations(path1_points):
+        F1, D1, X1 = calculate_F1_D1(perm1)
+        # For path2, use greedy algorithm to generate initial path
+        perm2 = greedy_path(start, path2_points, is_plane1=False)
+        F2, D2, X2 = calculate_F2_D2(perm2)
+        total = F1 + F2
+        if total < min_total:
+            min_total = total
+            best_F1, best_D1 = F1, D1
+            best_F2, best_D2 = F2, D2
+            best_path1 = perm1
+            best_path2 = perm2
+            print(f"New min: {min_total}")
+
+    # Optionally, try random sampling for some permutations (optional)
+    for _ in range(20):
+        perm2 = random.sample(path2_points, len(path2_points))
+        F2, D2, X2 = calculate_F2_D2(perm2)
+        total = F1 + F2
+        if total < min_total:
+            min_total = total
+            best_F1, best_D1 = F1, D1
+            best_F2, best_D2 = F2, D2
+            best_path1 = perm1
+            best_path2 = perm2
+            print(f"New min: {min_total}")
+
+# Output the results
+print("\nOptimal Solution Found:")
+print("Best F1 + F2:", min_total)
+print("Best F1:", best_F1)
+print("Best D1:", best_D1)
+print("Best path1:", best_path1)
+print("Best F2:", best_F2)
+print("Best D2:", best_D2)
+print("Best path2:", best_path2)
+
+# Plot the routes
+def plot_path(start, path, color, label):
+    x = [start[0]] + [p[0] for p in path] + [start[0]]
+    y = [start[1]] + [p[1] for p in path] + [start[1]]
+    plt.plot(x, y, 'o-', color=color, label=label)
+    for i, p in enumerate(path):
+        plt.text(p[0], p[1], str(i+1))
+
+plt.figure(figsize=(12, 8))
+plot_path(start, best_path1, 'blue', 'Plane 1')
+plot_path(start, best_path2, 'red', 'Plane 2')
+plt.scatter(start[0], start[1], color='green', s=100, label='Start', zorder=5)
+plt.legend()
+plt.xlabel('X Coordinate')
+plt.ylabel('Y Coordinate')
+plt.title('Optimal Flight Paths for Two Planes')
+plt.grid()
+plt.show()
+\end{lstlisting}
+问题四的原始运行代码
+\begin{lstlisting}[language=Python, texcl=true]
+import heapq
+
+# Define the map and forbidden zones
+def create_map():
+    # Here should contain your map creation logic
+    # Return a dictionary where keys are nodes and values are lists of adjacent nodes
+    return {}
+
+def is_forbidden(node, forbidden_zones):
+    # Determine if the node is within a forbidden zone
+    for zone in forbidden_zones:
+        if node in zone:
+            return True
+    return False
+
+# A* algorithm implementation
+def a_star(start, goal, graph, forbidden_zones):
+    open_set = []
+    heapq.heappush(open_set, (0, 0, start, [start]))
+    
+    # Set of visited nodes
+    visited = set()
+    
+    while open_set:
+        current_f, current_g, current_node, path = heapq.heappop(open_set)
+        
+        # Check if the goal node is reached
+        if current_node == goal:
+            return path, current_g  # Return the path and total distance
+        
+        # Skip if the current node has been visited
+        if current_node in visited:
+            continue
+        visited.add(current_node)
+        
+        # Iterate over neighboring nodes
+        for neighbor in graph[current_node]:
+            # Skip nodes within forbidden zones
+            if is_forbidden(neighbor, forbidden_zones):
+                continue
+            
+            # Calculate path cost
+            cost = current_g + distance(current_node, neighbor)
+            
+            # Heuristic function to estimate remaining distance
+            h = distance(neighbor, goal)
+            f = cost + h
+            
+            # Add the neighbor node to the priority queue
+            if neighbor not in visited:
+                heapq.heappush(open_set, (f, cost, neighbor, path + [neighbor]))
+    
+    # If the queue is empty and no path is found, return an empty path and infinite distance
+    return [], float('inf')
+
+# Calculate the distance between two nodes (using Euclidean distance)
+def distance(node1, node2):
+    # Assume nodes are tuples (x, y)
+    return ((node1[0] - node2[0])**2 + (node1[1] - node2[1])**2) ** 0.5
+
+# Example usage
+if __name__ == "__main__":
+    # Create the map
+    graph = create_map()
+    # Define forbidden zones (example: two forbidden zones, each is a set of nodes)
+    forbidden_zones = [
+        { (1, 2), (1, 3), (2, 3), (2, 2) },
+        { (5, 5), (5, 6), (6, 6), (6, 5) }
+    ]
+    # Define start and goal nodes
+    start = (0, 0)
+    goal = (7, 7)
+    # Run the A* algorithm
+    path, total_distance = a_star(start, goal, graph, forbidden_zones)
+    
+    if path:
+        print(f"Path found: {path}")
+        print(f"Total distance: {total_distance}")
+    else:
+        print("No path found")
+\end{lstlisting}
+\end{document}
+}
